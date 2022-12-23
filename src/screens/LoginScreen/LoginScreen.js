@@ -2,15 +2,16 @@ import {StyleSheet, View, FlatList, Text} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import UserInput from '../../Assets/utils/components/UserInput';
 import SubmitButton from '../../Assets/utils/components/SubmitButton';
-import {useSelector, useDispatch} from 'react-redux';
-import {getUser} from '../../redux/action/Action';
+import {useSelector, useDispatch, connect} from 'react-redux';
+import {getUser, getUserfromSm} from '../../redux/action/Action';
 
 const LoginScreen = () => {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
+
   const {user} = useSelector(state => state.userReducer);
   const dispatch = useDispatch();
-
+  const API = 'http://192.168.0.108:8080/api/user';
   const loginSubmit = () => {
     if (userEmail.length <= 0 || userPassword.length <= 0) {
       console.log('Empty');
@@ -20,8 +21,9 @@ const LoginScreen = () => {
 
   useEffect(() => {
     dispatch(getUser());
+    getUserfromSm(API);
   }, []);
-
+  // const {usersm} = this.props;
   return (
     <View>
       <UserInput
@@ -49,7 +51,18 @@ const LoginScreen = () => {
   );
 };
 
-export default LoginScreen;
+const mapStateToProps = ({userReducer}) => {
+  const {usersm} = userReducer;
+  return {
+    usersm,
+  };
+};
+
+const mapDispatchToProps = {
+  getUser,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
 
 const styles = StyleSheet.create({
   UserInputStyle: {

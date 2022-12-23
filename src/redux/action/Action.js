@@ -1,4 +1,7 @@
+import {getRequestApi} from '../servicemanager/ServiceManager';
+
 export const GET_USER = 'GET_USER';
+export const GET_USER_SM = 'GET_USER_SM';
 
 const API_URL = 'http://192.168.0.108:8080/api/user';
 
@@ -24,4 +27,8 @@ export const getUser = () => {
   } catch (error) {
     console.log(error);
   }
+};
+
+export const getUserfromSm = url => {
+  return dispatch => getRequestApi({url, dispatch, actionType: GET_USER_SM});
 };
