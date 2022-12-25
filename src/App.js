@@ -6,6 +6,7 @@ import Splash from './screens/Splash';
 import LoginScreen from './screens/LoginScreen/LoginScreen';
 import {Provider} from 'react-redux';
 import {Store} from './redux/store/store';
+import HomeScreen from './screens/HomeScreen/HomeScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +23,11 @@ const App = () => {
           <Stack.Screen
             name="Login Screen"
             component={LoginScreen}
+            options={{headerShown: true}}
+          />
+          <Stack.Screen
+            name="Home Screen"
+            component={HomeScreen}
             options={{headerShown: true}}
           />
         </Stack.Navigator>

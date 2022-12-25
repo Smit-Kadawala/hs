@@ -6,7 +6,7 @@ import {getAllUser} from '../../redux/action/LoginAction';
 import UserInput from '../../Assets/utils/components/UserInput';
 import SubmitButton from '../../Assets/utils/components/SubmitButton';
 
-const LoginScreen = () => {
+const LoginScreen = ({navigation}) => {
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const {AllUser} = useSelector(state => state.LoginReducers);
@@ -20,6 +20,7 @@ const LoginScreen = () => {
     if (userEmail.length <= 0 || userPassword.length <= 0) {
       console.log('Empty');
     } else {
+      navigation.replace('Home Screen');
     }
   };
 
