@@ -10,12 +10,27 @@ export const configHeader = () => {
 };
 
 export const getRequestApi = ({url, dispatch, actionType}) => {
-  console.log('getRequestApiSm');
   let headers = configHeader();
-  return axios
-    .get(url, headers)
-    .then(response => {
-      dispatch({type: actionType, payload: response});
+
+  console.log(
+    url,
+    'url-------------------------',
+    headers,
+    'headers----------------',
+  );
+  return axios({
+    method: 'get',
+    url: url,
+    header: headers,
+  })
+    .then(function (r) {
+      // console.log('response', JSON.stringify(r.data));
+      dispatch({
+        type: actionType,
+        payload: r.data,
+      });
     })
-    .catch(error => console.log(error));
+    .catch(function (e) {
+      console.log('error', e);
+    });
 };
